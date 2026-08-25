@@ -7738,6 +7738,20 @@
     "target": "9f4238cb-69aa-4f0d-ac73-231caa09ed2b",
     "sourceHandle": "4f97c651-7240-493b-9217-ad956059c12e",
     "targetHandle": "9f4238cb-69aa-4f0d-ac73-231caa09ed2b"
+   },
+   {
+    "id": "reactflow__edge-cb54ea05-7fe4-4913-a7f1-c382f8aad05de1ab9e18-d3b1-46d5-80fd-e8378a258953-9f4238cb-69aa-4f0d-ac73-231caa09ed2b9f4238cb-69aa-4f0d-ac73-231caa09ed2b",
+    "source": "cb54ea05-7fe4-4913-a7f1-c382f8aad05d",
+    "target": "9f4238cb-69aa-4f0d-ac73-231caa09ed2b",
+    "sourceHandle": "e1ab9e18-d3b1-46d5-80fd-e8378a258953",
+    "targetHandle": "9f4238cb-69aa-4f0d-ac73-231caa09ed2b"
+   },
+   {
+    "id": "reactflow__edge-cb54ea05-7fe4-4913-a7f1-c382f8aad05d8ac6b9ac-d827-46dd-8f38-e32e1fd0b319-9f4238cb-69aa-4f0d-ac73-231caa09ed2b9f4238cb-69aa-4f0d-ac73-231caa09ed2b",
+    "source": "cb54ea05-7fe4-4913-a7f1-c382f8aad05d",
+    "target": "9f4238cb-69aa-4f0d-ac73-231caa09ed2b",
+    "sourceHandle": "8ac6b9ac-d827-46dd-8f38-e32e1fd0b319",
+    "targetHandle": "9f4238cb-69aa-4f0d-ac73-231caa09ed2b"
    }
   ],
   "url": "0f371c6o",

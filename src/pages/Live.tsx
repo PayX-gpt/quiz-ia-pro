@@ -11,6 +11,7 @@ import { EVENTS_TABLE, isSupabaseConfigured, supabase } from '../lib/supabase'
 import { PERIODS, loadSnapshot, type LiveSnapshot, type Period } from '../lib/liveData'
 import { usePresenceObserver } from '../hooks/usePresenceObserver'
 import { BreakdownTable, Donut, FunnelMap, MetricCard, Panel, money, nf, pct } from './live/parts'
+import { VariantControl } from './live/VariantControl'
 
 const TABS = ['Visão Geral', 'Funil', 'Campanhas', 'Criativos', 'Teste A/B', 'Vendas', 'Dispositivos', 'Auditoria'] as const
 type Tab = (typeof TABS)[number]
@@ -377,11 +378,14 @@ export default function Live() {
                   extra={`quiz completo: ${pct(v.completion)}`} />
               ))}
             </div>
-            <Panel className="mb-4" title="Teste A/B de hook · rodízio entre as 4 variantes do funil">
+            <Panel className="mb-4" title="Divisão do tráfego · quanto cada hook recebe">
+              <VariantControl />
+            </Panel>
+            <Panel className="mb-4" title="Teste A/B de hook · desempenho de cada variante">
               <BreakdownTable rows={data?.variantRows ?? []} firstCol="Variante"
                 emptyHint="Sem dados de variante ainda." />
               <div className="border-t border-white/5 px-4 py-2 text-[11px] text-white/30">
-                Cada sessão sorteia uma variante na primeira visita e fica nela. Force uma para conferir com <code className="font-mono">?variant=C</code>.
+                Force uma variante para conferir com <code className="font-mono">?variant=C</code>.
               </div>
             </Panel>
           </>

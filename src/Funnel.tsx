@@ -6,6 +6,7 @@ import { trackEvent, trackEventReliable } from './lib/metrics'
 import { usePresence } from './hooks/usePresence'
 import { STEP_BY_ID } from './lib/steps'
 import { getVariant } from './lib/abtest'
+import { refreshWeights } from './lib/config'
 import funnelData from './funnel.json'
 import { FunnelEngine } from './engine'
 import type { Block, Funnel } from './types'
@@ -91,6 +92,8 @@ export default function Funnel() {
   useEffect(() => {
     initTracking()
     initPixels()
+    // Busca os pesos do A/B para a próxima visita, sem bloquear esta.
+    void refreshWeights()
     initBackredirect(() => engine.node(nodeIdRef.current)?.data.title ?? '')
     trackEvent('page_loaded', stepMeta(nodeIdRef.current))
   }, [engine, stepMeta])
