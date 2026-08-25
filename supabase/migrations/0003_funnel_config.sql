@@ -18,11 +18,9 @@ CREATE POLICY "leitura da config"
   ON public.funnel_config FOR SELECT TO anon, authenticated
   USING (true);
 
--- ATENÇÃO: escrita liberada para anon é o que permite salvar os pesos pelo
--- /live sem login. Enquanto o painel estiver público, qualquer pessoa com a
--- URL pode mudar a divisão do seu tráfego. Antes de rodar tráfego pago,
--- troque para `TO authenticated` e coloque login no painel.
+-- Só quem estiver logado no painel pode mudar a divisão do tráfego.
+-- Sem isso, qualquer um com a URL do /live redirecionaria suas campanhas.
 DROP POLICY IF EXISTS "escrita da config" ON public.funnel_config;
 CREATE POLICY "escrita da config"
-  ON public.funnel_config FOR ALL TO anon, authenticated
+  ON public.funnel_config FOR ALL TO authenticated
   USING (true) WITH CHECK (true);

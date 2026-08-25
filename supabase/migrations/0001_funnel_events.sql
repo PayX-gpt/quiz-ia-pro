@@ -32,12 +32,11 @@ CREATE POLICY "anon pode inserir eventos"
   ON public.funnel_events FOR INSERT TO anon, authenticated
   WITH CHECK (true);
 
--- ATENÇÃO: esta policy deixa qualquer um com a anon key LER os eventos.
--- É o que faz o /live funcionar sem login. Se o painel for ficar exposto,
--- troque `TO anon, authenticated` por `TO authenticated` e coloque login.
+-- Leitura só para quem está logado no painel. O funil no navegador usa a
+-- anon key apenas para INSERIR eventos, então não precisa ler nada.
 DROP POLICY IF EXISTS "leitura dos eventos" ON public.funnel_events;
 CREATE POLICY "leitura dos eventos"
-  ON public.funnel_events FOR SELECT TO anon, authenticated
+  ON public.funnel_events FOR SELECT TO authenticated
   USING (true);
 
 -- Realtime: alimenta o feed ao vivo do painel.

@@ -34,7 +34,7 @@ ALTER TABLE public.purchases ENABLE ROW LEVEL SECURITY;
 -- service role key e portanto ignora RLS — o navegador nunca insere venda.
 DROP POLICY IF EXISTS "leitura das vendas" ON public.purchases;
 CREATE POLICY "leitura das vendas"
-  ON public.purchases FOR SELECT TO anon, authenticated
+  ON public.purchases FOR SELECT TO authenticated
   USING (true);
 
 ALTER PUBLICATION supabase_realtime ADD TABLE public.purchases;
