@@ -2,17 +2,36 @@ import { useEffect, useState } from 'react'
 import type { Block } from '../types'
 import { Rich } from './Rich'
 
+/**
+ * `?nodelay=1` libera na hora os botões que têm espera.
+ *
+ * Existe para conferência: as etapas de vídeo seguram o avanço por até
+ * 5min20s, e esperar isso a cada teste é inviável. Quem chega pelo anúncio
+ * não usa o parâmetro, então a experiência real fica intacta.
+ */
+function bypassDelay(): boolean {
+  try {
+    return new URLSearchParams(window.location.search).get('nodelay') === '1'
+  } catch {
+    return false
+  }
+}
+
 export function ButtonBlock({ block, onClick }: { block: Block; onClick: () => void }) {
   const d = block.data
   const delay = d.delayToShow ?? {}
-  const [visible, setVisible] = useState(!delay.enabled)
+  const skip = bypassDelay()
+  const [visible, setVisible] = useState(!delay.enabled || skip)
 
   useEffect(() => {
-    if (!delay.enabled) return
+    if (!delay.enabled || skip) {
+      setVisible(true)
+      return
+    }
     setVisible(false)
     const t = setTimeout(() => setVisible(true), (delay.seconds ?? 0) * 1000)
     return () => clearTimeout(t)
-  }, [block.id, delay.enabled, delay.seconds])
+  }, [block.id, delay.enabled, delay.seconds, skip])
 
   if (!visible) return null
 
